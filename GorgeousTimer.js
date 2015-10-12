@@ -26,12 +26,9 @@ function getCurTime(){
 }
 function render(cxt){
 	// get the numbers of hour, minute, second
-	// var hour = parseInt(curTime / 3600),
-	// 	minute = parseInt((curTime - hour * 3600) / 60),
-	// 	second = curTime % 60;
-	var hour = 12,
-		minute = 34,
-		second = 56;
+	var hour = parseInt(curTime / 3600),
+		minute = parseInt((curTime - hour * 3600) / 60),
+		second = curTime % 60;
 	// hour
 	renderNumber(marginLeft, marginTop, parseInt(hour / 10), cxt);
 	renderNumber(marginLeft + 15 * (radius + 1), marginTop, parseInt(hour % 10), cxt);
