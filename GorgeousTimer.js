@@ -13,7 +13,7 @@ window.onload = function(){
 	canvas.width = windowWidth;
 	canvas.height = windowHeight;
 	curTime = getCurTime();
-	// console.log(curTime);	
+	// console.log(curTime);
 }
 
 function getCurTime(){
@@ -22,4 +22,3 @@ function getCurTime(){
 	rest = Math.round(ret / 1000);
 	return (rest > 0)? rest : 0;
 }
-
