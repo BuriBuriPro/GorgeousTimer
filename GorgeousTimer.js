@@ -18,7 +18,8 @@ window.onload = function(){
 
 function getCurTime(){
 	var tempTime = new Date(),
-		ret = endTime.getTime() - tempTime.getTime();
-	ret = Math.round(ret / 1000);
-	return (ret > 0)? ret : 0;
+		rest = endTime.getTime() - tempTime.getTime();
+	rest = Math.round(ret / 1000);
+	return (rest > 0)? rest : 0;
 }
+
