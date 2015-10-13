@@ -5,7 +5,7 @@ var windowWidth = 1024,
 	radius = 8;
 const pi = Math.PI;
 
-var endTime = new Date(2015, 9, 13, 0, 0, 0),
+var endTime = new Date(2015, 9, 13, 24, 0, 0),
 	curTime = 0;
 
 window.onload = function(){
@@ -14,8 +14,10 @@ window.onload = function(){
 	canvas.width = windowWidth;
 	canvas.height = windowHeight;
 	curTime = getCurTime();
-	
+	setInterval(function(){
 	render(context);
+	update();
+ 	}, 50);
 }
 
 function getCurTime(){
@@ -25,6 +27,8 @@ function getCurTime(){
 	return (rest > 0)? rest : 0;
 }
 function render(cxt){
+	// clean the whole canvas
+	cxt.clearRect(0, 0, windowWidth, windowHeight);
 	// get the numbers of hour, minute, second
 	var hour = parseInt(curTime / 3600),
 		minute = parseInt((curTime - hour * 3600) / 60),
@@ -45,7 +49,7 @@ function render(cxt){
 }
 function renderNumber(x, y, num, cxt){
 	var i, j;
-	cxt.fillStyle = "blue";
+	cxt.fillStyle = "rgb(0, 102, 153)";
 	for(i = 0; i < digit[num].length; i ++)
 		for(j = 0; j < digit[num][i].length; j ++){
 			if(digit[num][i][j] === 1){
@@ -55,4 +59,9 @@ function renderNumber(x, y, num, cxt){
 				cxt.closePath();
 			}
 		}	
+}
+function update(){
+	// change to the number of timer
+	var nextTime = getCurTime();
+	curTime = nextTime;
 }
