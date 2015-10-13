@@ -16,7 +16,9 @@ var endTime = new Date(2015, 9, 13, 24, 0, 0),
 	minuteSecondX = marginLeft + 54 * (radius + 1),
 	secondFirstX = marginLeft + 78 * (radius + 1),
 	secondSecondX = marginLeft + 93 * (radius + 1),
-	posY = marginTop;
+	posY = marginTop,
+	balls = [],
+	colors = ["#33B5E5", "#0099CC", "#AA66CC", "#9933CC", "#99CC00", "#669900", "#FFBB33", "#FF8800", "#FF4444", "#CC0000"];
 
 window.onload = function(){
 	var canvas = document.getElementById("canvas"),
@@ -78,8 +80,44 @@ function update(){
 		nextSecond = nextTime % 60;
 	// judge which numbers changed
 	// changed numbers are transformed into balls
-	// if(parseInt(curHour / 10) != parseInt(nextHour / 10)){
-	// 	addBalls()
-	// }
+	// hour
+	if(parseInt(curHour / 10) != parseInt(nextHour / 10)){
+		addBalls(hourFirstX, posY, parseInt(nextHour / 10));
+	}
+	if(parseInt(curHour % 10) != parseInt(nextHour % 10)){
+		addBalls(hourSecondX, posY, parseInt(nextHour % 10));
+	}
+	// minute
+	if(parseInt(curMinute / 10) != parseInt(nextMinute / 10)){
+		addBalls(minuteFirstX, posY, parseInt(nextMinute / 10));
+	}
+	if(parseInt(curMinute % 10) != parseInt(nextMinute % 10)){
+		addBalls(minuteSecondX, posY, parseInt(nextMinute % 10));
+	}
+	// second
+	if(parseInt(curSecond / 10) != parseInt(nextSecond / 10)){
+		addBalls(secondFirstX, posY, parseInt(nextSecond / 10));
+	}
+	if(parseInt(curSecond % 10) != parseInt(nextSecond % 10)){
+		addBalls(secondSecondX, posY, parseInt(nextSecond % 10));
+	}
 	curTime = nextTime;
+}
+function addBalls(x, y, num){
+	var i, j;
+	for(i = 0; i < digit[num].length; i ++)
+		for(j = 0; j < digit[num][i].length; j ++){
+			if(digit[num][i][j] == 1){
+				var ball = {
+					x: j * 2 * (radius + 1),
+					y: i * 2 * (radius + 1),
+					// use random to set the params
+					g: 1.5 + Math.random(),
+					vx: Math.pow(-1, Math.ceil(Math.random() * 1000)) * 8,
+					vy: -3,
+					color: colors[Math.floor(Math.random() * colors.length)]
+				};
+				balls.push(ball);				
+			}
+		}
 }
