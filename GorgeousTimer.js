@@ -3,7 +3,7 @@ var windowWidth = 1024,
 	marginTop = 60,
 	marginLeft = 30,
 	radius = 8;
-const pi = Math.PI;
+const PI = Math.PI;
 
 var endTime = new Date(2015, 9, 13, 24, 0, 0),
 	curTime = 0,
@@ -58,6 +58,15 @@ function render(cxt){
 	// second
 	renderNumber(secondFirstX, posY, parseInt(curSecond / 10), cxt);
 	renderNumber(secondSecondX, posY, parseInt(curSecond % 10), cxt);
+	// render the balls
+	var i = 0;
+	for(; i < balls.length; i ++){
+		cxt.fillStyle = balls[i].color;
+		cxt.beginPath();
+		cxt.arc(balls[i].x, balls[i].y, radius, 0, 2 * PI);
+		cxt.fill();
+		cxt.closePath();
+	}
 }
 function renderNumber(x, y, num, cxt){
 	var i, j;
@@ -66,7 +75,7 @@ function renderNumber(x, y, num, cxt){
 		for(j = 0; j < digit[num][i].length; j ++){
 			if(digit[num][i][j] === 1){
 				cxt.beginPath();
-				cxt.arc(x + j * 2 * (radius + 1) + radius + 1, y + i * 2 * (radius + 1) + radius + 1, radius, 0, 2 * pi);
+				cxt.arc(x + j * 2 * (radius + 1) + radius + 1, y + i * 2 * (radius + 1) + radius + 1, radius, 0, 2 * PI);
 				cxt.fill();
 				cxt.closePath();
 			}
@@ -112,8 +121,8 @@ function addBalls(x, y, num){
 		for(j = 0; j < digit[num][i].length; j ++){
 			if(digit[num][i][j] == 1){
 				var ball = {
-					x: j * 2 * (radius + 1),
-					y: i * 2 * (radius + 1),
+					x: x + j * 2 * (radius + 1),
+					y: y + i * 2 * (radius + 1),
 					// use random to set the params
 					g: 1.5 + Math.random(),
 					vx: Math.pow(-1, Math.ceil(Math.random() * 1000)) * 8,
@@ -132,7 +141,7 @@ function updateBalls(){
 		balls[i].y += balls[i].vy;
 		balls[i].vy += balls[i].g;
 		// detect collision
-		if(balls[i].x + radius > 0 || balls[i].x - radius < windowHeight){
+		if(balls[i].y + radius >= windowHeight){
 			// slow down the speed
 			balls[i].vy = - balls[i].vy * 0.75;
 		}
