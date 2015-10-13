@@ -6,7 +6,17 @@ var windowWidth = 1024,
 const pi = Math.PI;
 
 var endTime = new Date(2015, 9, 13, 24, 0, 0),
-	curTime = 0;
+	curTime = 0,
+	curHour = 0,
+	curMinute = 0,
+	curSecond = 0,
+	hourFirstX = marginLeft,
+	hourSecondX = marginLeft + 15 * (radius + 1),	
+	minuteFirstX = marginLeft + 39 * (radius + 1),
+	minuteSecondX = marginLeft + 54 * (radius + 1),
+	secondFirstX = marginLeft + 78 * (radius + 1),
+	secondSecondX = marginLeft + 93 * (radius + 1),
+	posY = marginTop;
 
 window.onload = function(){
 	var canvas = document.getElementById("canvas"),
@@ -30,22 +40,22 @@ function render(cxt){
 	// clean the whole canvas
 	cxt.clearRect(0, 0, windowWidth, windowHeight);
 	// get the numbers of hour, minute, second
-	var hour = parseInt(curTime / 3600),
-		minute = parseInt((curTime - hour * 3600) / 60),
-		second = curTime % 60;
+	curHour = parseInt(curTime / 3600);
+	curMinute = parseInt((curTime - curHour * 3600) / 60);
+	curSecond = curTime % 60;
 	// hour
-	renderNumber(marginLeft, marginTop, parseInt(hour / 10), cxt);
-	renderNumber(marginLeft + 15 * (radius + 1), marginTop, parseInt(hour % 10), cxt);
+	renderNumber(hourFirstX, posY, parseInt(curHour / 10), cxt);
+	renderNumber(hourSecondX, posY, parseInt(curHour % 10), cxt);
 	// colon
-	renderNumber(marginLeft + 30 * (radius + 1), marginTop, 10, cxt);
+	renderNumber(marginLeft + 30 * (radius + 1), posY, 10, cxt);
 	// minute
-	renderNumber(marginLeft + 39 * (radius + 1), marginTop, parseInt(minute / 10), cxt);
-	renderNumber(marginLeft + 54 * (radius + 1), marginTop, parseInt(minute % 10), cxt);
+	renderNumber(minuteFirstX, posY, parseInt(curMinute / 10), cxt);
+	renderNumber(minuteSecondX, posY, parseInt(curMinute % 10), cxt);
 	// colon
-	renderNumber(marginLeft + 69 * (radius + 1), marginTop, 10, cxt);
+	renderNumber(marginLeft + 69 * (radius + 1), posY, 10, cxt);
 	// second
-	renderNumber(marginLeft + 78 * (radius + 1), marginTop, parseInt(second / 10), cxt);
-	renderNumber(marginLeft + 93 * (radius + 1), marginTop, parseInt(second % 10), cxt);
+	renderNumber(secondFirstX, posY, parseInt(curSecond / 10), cxt);
+	renderNumber(secondSecondX, posY, parseInt(curSecond % 10), cxt);
 }
 function renderNumber(x, y, num, cxt){
 	var i, j;
@@ -62,6 +72,14 @@ function renderNumber(x, y, num, cxt){
 }
 function update(){
 	// change to the number of timer
-	var nextTime = getCurTime();
+	var nextTime = getCurTime(),
+		nextHour = parseInt(nextTime / 3600);
+		nextMinute = parseInt((nextTime - nextHour * 3600) / 60);
+		nextSecond = nextTime % 60;
+	// judge which numbers changed
+	// changed numbers are transformed into balls
+	// if(parseInt(curHour / 10) != parseInt(nextHour / 10)){
+	// 	addBalls()
+	// }
 	curTime = nextTime;
 }
