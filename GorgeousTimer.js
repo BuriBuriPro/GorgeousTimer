@@ -134,7 +134,7 @@ function addBalls(x, y, num){
 		}
 }
 function updateBalls(){
-	var i;
+	var i, count;
 	for(i = 0; i < balls.length; i ++){
 		// move the balls and add the speed
 		balls[i].x += balls[i].vx;
@@ -143,7 +143,16 @@ function updateBalls(){
 		// detect collision
 		if(balls[i].y + radius >= windowHeight){
 			// slow down the speed
+			balls[i].y = windowHeight - radius;
 			balls[i].vy = - balls[i].vy * 0.75;
 		}
+	}	
+	for(i = 0, count = 0; i < balls.length; i ++){
+		if(balls[i].x + radius > 0 && balls[i].x - radius < windowWidth){
+			balls[count ++] = balls[i];
+		}
+	}
+	while(balls.length > count){
+		balls.pop();
 	}
 }
