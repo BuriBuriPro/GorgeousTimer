@@ -78,30 +78,33 @@ function update(){
 		nextHour = parseInt(nextTime / 3600);
 		nextMinute = parseInt((nextTime - nextHour * 3600) / 60);
 		nextSecond = nextTime % 60;
-	// judge which numbers changed
-	// changed numbers are transformed into balls
-	// hour
-	if(parseInt(curHour / 10) != parseInt(nextHour / 10)){
-		addBalls(hourFirstX, posY, parseInt(nextHour / 10));
-	}
-	if(parseInt(curHour % 10) != parseInt(nextHour % 10)){
-		addBalls(hourSecondX, posY, parseInt(nextHour % 10));
-	}
-	// minute
-	if(parseInt(curMinute / 10) != parseInt(nextMinute / 10)){
-		addBalls(minuteFirstX, posY, parseInt(nextMinute / 10));
-	}
-	if(parseInt(curMinute % 10) != parseInt(nextMinute % 10)){
-		addBalls(minuteSecondX, posY, parseInt(nextMinute % 10));
-	}
-	// second
-	if(parseInt(curSecond / 10) != parseInt(nextSecond / 10)){
-		addBalls(secondFirstX, posY, parseInt(nextSecond / 10));
-	}
-	if(parseInt(curSecond % 10) != parseInt(nextSecond % 10)){
-		addBalls(secondSecondX, posY, parseInt(nextSecond % 10));
-	}
+	if(curTime != nextTime){
+		// judge which numbers changed
+		// changed numbers are transformed into balls
+		// hour
+		if(parseInt(curHour / 10) != parseInt(nextHour / 10)){
+			addBalls(hourFirstX, posY, parseInt(nextHour / 10));
+		}
+		if(parseInt(curHour % 10) != parseInt(nextHour % 10)){
+			addBalls(hourSecondX, posY, parseInt(nextHour % 10));
+		}
+		// minute
+		if(parseInt(curMinute / 10) != parseInt(nextMinute / 10)){
+			addBalls(minuteFirstX, posY, parseInt(nextMinute / 10));
+		}
+		if(parseInt(curMinute % 10) != parseInt(nextMinute % 10)){
+			addBalls(minuteSecondX, posY, parseInt(nextMinute % 10));
+		}
+		// second
+		if(parseInt(curSecond / 10) != parseInt(nextSecond / 10)){
+			addBalls(secondFirstX, posY, parseInt(nextSecond / 10));
+		}
+		if(parseInt(curSecond % 10) != parseInt(nextSecond % 10)){
+			addBalls(secondSecondX, posY, parseInt(nextSecond % 10));
+		}
 	curTime = nextTime;
+	}
+	updateBalls();
 }
 function addBalls(x, y, num){
 	var i, j;
@@ -120,4 +123,18 @@ function addBalls(x, y, num){
 				balls.push(ball);				
 			}
 		}
+}
+function updateBalls(){
+	var i;
+	for(i = 0; i < balls.length; i ++){
+		// move the balls and add the speed
+		balls[i].x += balls[i].vx;
+		balls[i].y += balls[i].vy;
+		balls[i].vy += balls[i].g;
+		// detect collision
+		if(balls[i].x + radius > 0 || balls[i].x - radius < windowHeight){
+			// slow down the speed
+			balls[i].vy = - balls[i].vy * 0.75;
+		}
+	}
 }
