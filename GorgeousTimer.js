@@ -2,34 +2,47 @@ var windowWidth = 1024,
 	windowHeight = 600,
 	marginTop = 60,
 	marginLeft = 30,
-	radius = 8;
+	radius = 5;
 const PI = Math.PI;
 
-var endTime = new Date(2015, 9, 13, 24, 0, 0),
+var endTime = new Date(2015, 9, 15, 23, 17, 40),
 	curTime = 0,
 	curHour = 0,
 	curMinute = 0,
-	curSecond = 0,
+	curSecond = 0,	
+	balls = [],
+	colors = ["#33B5E5", "#0099CC", "#AA66CC", "#9933CC", "#99CC00", "#669900", "#FFBB33", "#FF8800", "#FF4444", "#CC0000"];
+
+window.onload = function(){
+	windowWidth = document.body.clientWidth;
+	windowHeight = document.body.clientHeight;
+	// the timer takes up about 4/5 width
+	marginLeft = Math.round(windowWidth / 10);
+	radius = Math.round(windowWidth * 4 / 5 / 108);
+	var canvas = document.getElementById("canvas"),
+		context = canvas.getContext("2d");	
+	canvas.width = windowWidth;
+	canvas.height = windowHeight;
+	curTime = getCurTime();
+	// var timer;
 	hourFirstX = marginLeft,
 	hourSecondX = marginLeft + 15 * (radius + 1),	
 	minuteFirstX = marginLeft + 39 * (radius + 1),
 	minuteSecondX = marginLeft + 54 * (radius + 1),
 	secondFirstX = marginLeft + 78 * (radius + 1),
 	secondSecondX = marginLeft + 93 * (radius + 1),
-	posY = marginTop,
-	balls = [],
-	colors = ["#33B5E5", "#0099CC", "#AA66CC", "#9933CC", "#99CC00", "#669900", "#FFBB33", "#FF8800", "#FF4444", "#CC0000"];
-
-window.onload = function(){
-	var canvas = document.getElementById("canvas"),
-		context = canvas.getContext("2d");
-	canvas.width = windowWidth;
-	canvas.height = windowHeight;
-	curTime = getCurTime();
-	setInterval(function(){
-	render(context);
-	update();
- 	}, 50);
+	posY = marginTop;
+	var timer = window.setInterval(function(){
+		if(curTime <= 0){								
+				context.clearRect(0, 0, windowWidth, windowHeight);
+				window.clearInterval(timer);
+				return;
+				// window.location = "http://www.baidu.com";				
+			}		
+		console.log(1);
+		render(context);
+		update();
+ 		}, 50);	
 }
 
 function getCurTime(){
