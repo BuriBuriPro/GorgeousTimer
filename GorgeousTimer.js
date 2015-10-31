@@ -5,7 +5,7 @@ var windowWidth = 1024,
 	radius = 5;
 const PI = Math.PI;
 
-var endTime = new Date(2015, 9, 15, 23, 17, 40),
+var endTime = new Date(2015, 9, 23, 24, 17, 40),
 	curTime = 0,
 	curHour = 0,
 	curMinute = 0,
@@ -42,7 +42,7 @@ window.onload = function(){
 		console.log(1);
 		render(context);
 		update();
- 		}, 50);	
+ 		}, 35);	
 }
 
 function getCurTime(){
