@@ -1,0 +1,16 @@
+#getTime{
+	background-color: silver;
+	width: 250px;
+	height: 80px;
+	display: inline-block;
+}
+#getTime input{
+	width: 50px;
+	height: 25px;
+	line-height: 25px;
+	margin: 5px 10px;
+}
+#getTime input:last-child{
+	width: 220px;
+	height: 20px;
+}

@@ -5,15 +5,38 @@ var windowWidth = 1024,
 	radius = 5;
 const PI = Math.PI;
 
-var endTime = new Date(2015, 9, 23, 24, 17, 40),
-	curTime = 0,
+var fixedDate = new Date(),
+	targetHour = 22,
+	targetMin = 23,
+	targetSec = 25;
+var endTime = 0;
+var curTime = 0,
 	curHour = 0,
 	curMinute = 0,
 	curSecond = 0,	
 	balls = [],
 	colors = ["#33B5E5", "#0099CC", "#AA66CC", "#9933CC", "#99CC00", "#669900", "#FFBB33", "#FF8800", "#FF4444", "#CC0000"];
+// setTimer();
+var getTime = document.getElementById("getTime"),
+		getHour = getTime.children[0],
+		getMin = getTime.children[1],
+		getSec = getTime.children[2],
+		getBtn = getTime.lastChild;
+		// fix year, month, day
+	var fixedDate = new Date();		
+	getBtn.addEventListener("click", function(){
+		targetHour = parseInt(getHour.value);
+		targetMin = parseInt(getMin.value);
+		targetSec = parseInt(getSec.value);
+		console.log(targetHour, targetMin, targetSec);
+		endTime = new Date(fixedDate.getFullYear(), fixedDate.getMonth(), fixedDate.getDate(), 22, 22, 22);
+		setTimer();
+	}, false);
 
-window.onload = function(){
+
+// window.onload = function(){
+function setTimer(){
+	// window.onload = function(){
 	windowWidth = document.body.clientWidth;
 	windowHeight = document.body.clientHeight;
 	// the timer takes up about 4/5 width
@@ -39,12 +62,11 @@ window.onload = function(){
 				return;
 				// window.location = "http://www.baidu.com";				
 			}		
-		console.log(1);
 		render(context);
 		update();
  		}, 35);	
+	// }
 }
-
 function getCurTime(){
 	var tempTime = new Date(),
 		rest = endTime.getTime() - tempTime.getTime();
