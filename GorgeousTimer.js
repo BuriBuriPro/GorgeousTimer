@@ -29,8 +29,9 @@ var getTime = document.getElementById("getTime"),
 		targetMin = parseInt(getMin.value);
 		targetSec = parseInt(getSec.value);
 		console.log(targetHour, targetMin, targetSec);
-		endTime = new Date(fixedDate.getFullYear(), fixedDate.getMonth(), fixedDate.getDate(), 22, 22, 22);
+		endTime = new Date(fixedDate.getFullYear(), fixedDate.getMonth(), fixedDate.getDate(), targetHour, targetMin, targetSec);
 		setTimer();
+		getTime.style.visibility="hidden";
 	}, false);
 
 
@@ -56,7 +57,8 @@ function setTimer(){
 	secondSecondX = marginLeft + 93 * (radius + 1),
 	posY = marginTop;
 	var timer = window.setInterval(function(){
-		if(curTime <= 0){								
+		if(curTime <= 0){		
+				alert("Time is over.");						
 				context.clearRect(0, 0, windowWidth, windowHeight);
 				window.clearInterval(timer);
 				return;
@@ -155,6 +157,7 @@ function addBalls(x, y, num){
 	for(i = 0; i < digit[num].length; i ++)
 		for(j = 0; j < digit[num][i].length; j ++){
 			if(digit[num][i][j] == 1){
+
 				var ball = {
 					x: x + j * 2 * (radius + 1),
 					y: y + i * 2 * (radius + 1),
@@ -190,4 +193,5 @@ function updateBalls(){
 	while(balls.length > count){
 		balls.pop();
 	}
+	
 }
