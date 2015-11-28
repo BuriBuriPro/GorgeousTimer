@@ -5,7 +5,14 @@
 	<link rel="stylesheet" href="style.css" />
 </head>
 <body style="height:100%">
-	<div id="getTime"><input type="text" placeholder="hour" />:<input type="text" placeholder="minute" />:<input type="text" placeholder="second" /><br /><input type="button" /></div>
+	<div class="descriptions">
+		<p>基于HTML5 Canvas的数字时钟计时器</p>
+		<p>设置时间为24小时制</p>
+		<p>设置的时间在当前时间之后，否则会提示时间已到</p>
+		<p>计时结束后也会弹窗提示时间已到</p>
+		<p><a href="https://github.com/BuriBuriPro/GorgeousTimer">源码</a></p>
+	</div>
+	<div id="getTime"><input type="text" placeholder="hour" />:<input type="text" placeholder="minute" />:<input type="text" placeholder="second" /><br /><input type="button" value="SET" /></div>
 	<canvas id="canvas" style="height:100%;">
 		If you are seeing this, it means your browser doesn't support canvas element.
 		Please change your browser for others like Chrome.
