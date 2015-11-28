@@ -33,8 +33,6 @@ var getTime = document.getElementById("getTime"),
 		setTimer();
 		getTime.style.visibility="hidden";
 	}, false);
-
-
 // window.onload = function(){
 function setTimer(){
 	// window.onload = function(){
