@@ -21,17 +21,18 @@ var getTime = document.getElementById("getTime"),
 		getHour = getTime.children[0],
 		getMin = getTime.children[1],
 		getSec = getTime.children[2],
-		getBtn = getTime.lastChild;
+		getBtn = getTime.lastChild,
+		getDesc = document.getElementsByClassName("descriptions")[0];
 		// fix year, month, day
 	var fixedDate = new Date();		
 	getBtn.addEventListener("click", function(){
-		targetHour = parseInt(getHour.value);
-		targetMin = parseInt(getMin.value);
-		targetSec = parseInt(getSec.value);
-		console.log(targetHour, targetMin, targetSec);
+		targetHour = parseInt(getHour.value) || 0;
+		targetMin = parseInt(getMin.value) || 0;
+		targetSec = parseInt(getSec.value) || 0;
 		endTime = new Date(fixedDate.getFullYear(), fixedDate.getMonth(), fixedDate.getDate(), targetHour, targetMin, targetSec);
 		setTimer();
-		getTime.style.visibility="hidden";
+		getTime.style.display="none";
+		getDesc.style.display="none";
 	}, false);
 
 
