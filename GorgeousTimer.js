@@ -186,7 +186,7 @@ function updateBalls(){
 			balls[i].vy = - balls[i].vy * 0.75;
 		}
 	}	
-	for(i = 0, count = 0; i < balls.length; i ++){
+	for(i = 0, count = 0; i < Math.min(balls.length, 300); i ++){
 		if(balls[i].x + radius > 0 && balls[i].x - radius < windowWidth){
 			balls[count ++] = balls[i];
 		}
