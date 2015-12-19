@@ -43,7 +43,7 @@ function setTimer(){
 	windowHeight = document.body.clientHeight;
 	// the timer takes up about 4/5 width
 	marginLeft = Math.round(windowWidth / 10);
-	radius = Math.round(windowWidth * 4 / 5 / 108);
+	radius = Math.round(windowWidth * 4 / 5 / 108) - 1;
 	var canvas = document.getElementById("canvas"),
 		context = canvas.getContext("2d");	
 	canvas.width = windowWidth;
